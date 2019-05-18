@@ -1,0 +1,126 @@
+/*
+没有经过优化的并查集
+*/
+
+/*
+#include <iostream>
+#include <cstdio>
+#include <string>
+#include <cmath>
+
+using namespace std;
+int fa[3000010];
+int num[3000010];
+int fbb(int x)
+{
+    if(fa[x]==-1)return x;
+    return fa[x]=fbb(fa[x]);
+}
+int main()
+{
+    int n,m;
+    while(cin>>n>>m)
+    {
+
+        if(n==0&&m==0)
+        {
+            break;
+        }
+        for(int i=0;i<n;i++)
+        {
+            num[i]=1;
+            fa[i]=-1;
+        }
+        for(int i=0;i<m;i++)
+        {
+            int k;
+            cin>>k;
+            if(k==0)continue;
+            k--;
+            int pre;
+            cin>>pre;
+            while(k--)
+            {
+                int g;
+                cin>>g;
+                int p=fbb(pre);
+                int q=fbb(g);
+                if(p==q)continue;
+                num[q]+=num[p];
+                fa[p]=q;
+            }
+        }
+        cout<<num[fbb(0)]<<endl;
+    }
+    return 0;
+}
+
+*/
+
+
+
+/*
+用 size 优化的并查集
+
+*/
+
+/*
+
+#include <iostream>
+#include <cmath>
+#include <string>
+#include <algorithm>
+
+
+using namespace std;
+
+int fa[1010],num[1010],v[1010];
+
+int fbb(int x)
+{
+    if(fa[x]==x)return x;
+    return fa[x]=fbb(fa[x]);
+}
+
+int main()
+{
+    int t,n,m;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n>>m;
+        int ans=n;
+        for(int i=1;i<=n;i++)
+        {
+            num[i]=1;
+            fa[i]=i;
+            v[i]=0;
+        }
+        for(int i=0;i<m;i++)
+        {
+            int a,b;
+            cin>>a>>b;
+            int p=fbb(a);
+            int q=fbb(b);
+            if(p==q)continue;
+            ans--;
+            if(num[p]<num[q])
+            {
+                fa[p]=q;
+                num[q]+=num[p];
+            }
+            else
+            {
+                fa[p]=q;
+                num[p]+=num[q];
+            }
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}
+
+
+
+*/
+
